@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-""" LFU Caching """
+""" LFU Cache done """
 from base_caching import BaseCaching
 from collections import OrderedDict
 
 
 class LFUCache(BaseCaching):
-    """ Class that inherits from BaseCaching and is a caching system """
+    """ Class to inherit from BaseCaching """
     def __init__(self):
         super().__init__()
         self.lru_cache = OrderedDict()
         self.lfu_cache = {}
 
     def put(self, key, item):
-        """ Assign to the dictionary, LFU algorithm """
+        """ dedicate the dictionary using LFU algorithm """
         if key in self.lru_cache:
             del self.lru_cache[key]
         if len(self.lru_cache) > BaseCaching.MAX_ITEMS - 1:
@@ -38,7 +38,7 @@ class LFUCache(BaseCaching):
         self.cache_data = dict(self.lru_cache)
 
     def get(self, key):
-        """ Return the value linked """
+        """ gives linked value """
         if key in self.lru_cache:
             value = self.lru_cache[key]
             self.lru_cache.move_to_end(key)

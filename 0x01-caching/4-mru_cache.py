@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-""" MRU Caching """
+""" MRU Cache """
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """ Class that inherits from BaseCaching and is a caching system """
+    """ class to inherite from basecaching """
     def __init__(self):
         super().__init__()
         self.head, self.tail = 'head', 'tail'
@@ -12,16 +12,16 @@ class MRUCache(BaseCaching):
         self.handle(self.head, self.tail)
 
     def handle(self, head, tail):
-        """ MRU algorithm, handle elements """
+        """ to handle elements """
         self.next[head], self.prev[tail] = tail, head
 
     def _remove(self, key):
-        """ MRU algorithm, remove element """
+        """ to remove element """
         self.handle(self.prev[key], self.next[key])
         del self.prev[key], self.next[key], self.cache_data[key]
 
     def _add(self, key, item):
-        """ MRU algorithm, add element """
+        """ to add element """
         if len(self.cache_data) > BaseCaching.MAX_ITEMS - 1:
             print("DISCARD: {}".format(self.prev[self.tail]))
             self._remove(self.prev[self.tail])
@@ -30,14 +30,14 @@ class MRUCache(BaseCaching):
         self.handle(key, self.tail)
 
     def put(self, key, item):
-        """ Assign to the dictionary """
+        """ return to the dict """
         if key and item:
             if key in self.cache_data:
                 self._remove(key)
             self._add(key, item)
 
     def get(self, key):
-        """ Return the value linked """
+        """ Return the linked value """
         if key is None or self.cache_data.get(key) is None:
             return None
         if key in self.cache_data:
